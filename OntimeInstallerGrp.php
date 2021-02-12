@@ -6,26 +6,30 @@ function nf($file, $to)
 {
 	if (file_exists($file)) {
 		if (file_exists($to.'/'.$file)) {
+			echo 'Delete '. $file .'<br>';
 			unlink($to.'/'.$file);
 		}
 		if (rename($file,$to.'/'.$file)) {
+			echo 'Move '.$file .'<br>';
 			return(TRUE);
 		} else {
-			echo 'Move Fail';
+			echo 'Move Fail'.'<br>';
 			return(FALSE);
 		}
 	} else {
-		echo 'File not found';
+		echo 'File not found'.'<br>';
 		return(FALSE);
 	}
 }
 
 $files= array('OnTime.php','OnTimeGrpsA.php','OnTimeGrpsB.php','OnTimeFunctions.php','OTigrp.php');
+echo 'Start '.'<br>';
 
-$base='ontime/';
+$base='ontime';
 
 $back = TRUE;
 foreach ($files as $x) {
+	echo 'Move '.$x.'<br>';
 	if (!nf($x,$base)) {
 		$back = FALSE;
 	}
@@ -35,6 +39,10 @@ if ($back) {
 	$install = new OnTime();
 	$install->Connect('admin','OT2021Free');
 	$install->InstallGrp();	
-//	unlink(basename($_SERVER['PHP_SELF']));
+	unlink(basename($_SERVER['PHP_SELF']));	
+	echo 'Delete '. basename($_SERVER['PHP_SELF']).'<br>';
+	unlink(basename($_SERVER['PHP_SELF']));
 }
+echo 'End ';
+
 ?>
