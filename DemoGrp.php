@@ -14,7 +14,6 @@ if (!array_key_exists('grp', $demo->features)) {
 	$demo->InstallGrp();
 }
 
-
 $demo->UserAdd('Demo','12345','active','Demostration user ','Demito');
 $demo->UserAdd('Demo1','12345','active','Demostration 1 ','me');
 $demo->UserAdd('Demo2','12345','active','Demostration two ','you');
