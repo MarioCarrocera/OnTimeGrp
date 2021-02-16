@@ -22,7 +22,7 @@ function nf($file, $to)
 	}
 }
 
-$files= array('OnTime.php','OnTimeGrpsA.php','OnTimeGrpsB.php','OnTimeFunctions.php','OTigrp.php');
+$files= array('OnTime.php','OnTimetmp.php','OnTimeGrpsA.php','OnTimeGrpsB.php','OnTimeFunctions.php','OTigrp.php','OnTimeAllways.php');
 echo 'Start '.'<br>';
 
 $base='ontime';
@@ -35,11 +35,12 @@ foreach ($files as $x) {
 	}
 }
 if ($back) {
-	include_once($base."/OnTime.php");
+	include_once($base."/OnTimetmp.php");
 	$install = new OnTime();
 	$install->Connect('admin','OT2021Free');
 	$install->InstallGrp();	
-	unlink(basename($_SERVER['PHP_SELF']));	
+	unlink($base."/OTigrp.php");			
+	unlink($base."/OnTimetmp.php");			
 	echo 'Delete '. basename($_SERVER['PHP_SELF']).'<br>';
 	unlink(basename($_SERVER['PHP_SELF']));
 }

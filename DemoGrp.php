@@ -10,10 +10,6 @@ $demo=new OnTime();
 echo "********** <br> Main containe <br> ********** <br> <br>";
 echo "Try conect with correct info ->Connect('admin','OT2021Free'): ";$demo->Connect('admin','OT2021Free');
 
-if (!array_key_exists('grp', $demo->features)) {
-	$demo->InstallGrp();
-}
-
 $demo->UserAdd('Demo','12345','active','Demostration user ','Demito');
 $demo->UserAdd('Demo1','12345','active','Demostration 1 ','me');
 $demo->UserAdd('Demo2','12345','active','Demostration two ','you');

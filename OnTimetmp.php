@@ -9,8 +9,10 @@ include_once("OnTimeCoreA.php");
 include_once("OnTimeCoreB.php");
 include_once("OnTimeGrpsA.php");
 include_once("OnTimeGrpsB.php");
+include_once("OTigrp.php");
 
 class OnTime{
+	use OTgrp;
 	use GrpsB;
 	use GrpsA;
 	use CoreB;
