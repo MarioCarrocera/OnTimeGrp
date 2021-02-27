@@ -1,21 +1,13 @@
 <?php
-trait GrpsA{
-
-	function CreateGroup($group,$name,$nick)
-	{
+trait GrpsA{	
+	function CrtGrp($group,$name,$nick){
 		if ($this->ot_connect()) {
-			if ($this->ot_can(2,'grp')) {
+			if ($this->ot_can('create','grp')) {
 				if ($this->not_exist($group, 'grp')) {
 					if ($this->ot_create($group, 'grp')) {
-						$tmparray=[];
-						$tmparray['nick']=$nick;
-						$tmparray['name']=$name;
-						$tmparray['crtusr']=$this->id;
-						$tmparray['crtdat']=$this->ot_now();
-						$tmparray['owner']=$this->id;
-						$this->ot_write('admin.json',$tmparray,'grp/'.$group);
-						$this->ot_addin($this->id,0,'users.json','grp/'.$group);
-						$this->ot_addin($group,0,'groups.json','usr/'.$this->id);
+						$this->ot_array(array('nick'=>$nick,'name'=>$name), 'admin.json', TRUE,'grp/'.$group);	
+						$this->ot_addin($this->id,'owner','users.json','grp/'.$group);
+						$this->ot_addin($group,'owner','groups.json','usr/'.$this->id);
 					}
 				}
 			}
@@ -23,24 +15,78 @@ trait GrpsA{
 		$this->ot_log( __METHOD__ , __FUNCTION__ , func_get_args() , $this->retval );
 		return $this->retval;
 	}
-
-	function DeleteGroup($group)
-	{
-		if ($this->ot_connect()) {
-			if ($this->ot_can(1,'grp')) {
-				if ($this->ot_exist($group, 'grp')) {
-					$atmp=$this->ot_readif('features.json','grp/'.$group);
-					foreach ($atmp as $iKey=> $iValue) {
-						$this->ot_deletein($group, 'groups.json',$iKey);
-					}
-					$atmp=$this->ot_readif('users.json','grp/'.$group);
-					foreach ($atmp as $iKey=> $iValue) {
-						$this->ot_deletein($group, 'groups.json','usr/'.$iKey);
-					}
-					$this->ot_remove($group, 'grp');
+	function GrpAddFtr($group, $Feature, $level){
+		if ($this->ot_exist($group,'grp')) {
+			if ($this->ot_can('access',$Feature)) {
+				$atmp=$this->ot_readif('users.json','grp/'.$group);
+				if ($this->ot_maxvalue($atmp[$this->id],2,"C0010M012")) {
+					if ($this->ot_exist($Feature)) {
+						$this->ot_addin($Feature,$level,'features.json','grp/'.$group);
+						$this->ot_addin($group,$level,'groups.json',$Feature);										}
 				}
 			}
 		}
+		$this->ot_log( __METHOD__ , __FUNCTION__ , func_get_args() , $this->retval );
+		return $this->retval;
+	}	
+	function GrpChgFtr($group, $Feature, $level){
+		if ($this->ot_exist($group,'grp')) {
+			if ($this->ot_can('access',$Feature)) {
+				$atmp=$this->ot_readif('users.json','grp/'.$group);
+				if ($this->ot_maxvalue($atmp[$this->id],3,"C0010M012")) {
+					if ($this->ot_exist($Feature)) {
+						$this->ot_changein($Feature,$level,'features.json','grp/'.$group);
+						$this->ot_changein($group,$level,'groups.json',$Feature);										}
+				}
+			}
+		}
+		$this->ot_log( __METHOD__ , __FUNCTION__ , func_get_args() , $this->retval );
+		return $this->retval;
+	}	
+	function GrpDltFtr($group, $Feature){
+		if ($this->ot_exist($group,'grp')) {
+			if ($this->ot_can('access',$Feature)) {
+				$atmp=$this->ot_readif('users.json','grp/'.$group);
+				if ($this->ot_maxvalue($atmp[$this->id],3,"C0010M012")) {
+					if ($this->ot_exist($Feature)) {
+						$this->ot_deletein($Feature,'features.json','grp/'.$group);
+						$this->ot_deletein($group,'groups.json',$Feature);											}
+				}
+			}
+		}
+		$this->ot_log( __METHOD__ , __FUNCTION__ , func_get_args() , $this->retval );
+		return $this->retval;
+	}	
+	function GrpAddPrv($group, $code, $value){
+		if ($this->ot_exist($group,'grp')) {
+			$atmp=$this->ot_readif('users.json','grp/'.$group);
+			if ($this->ot_maxvalue($atmp[$this->id],2,"C0010M012")) {
+				$this->ot_addin($code,$value,'private.json','grp/'.$group);
+			}
+		}
+		$this->ot_log( __METHOD__ , __FUNCTION__ , func_get_args() , $this->retval );
+		return $this->retval;
+	}	
+	function GrpChgPrv($group, $code, $value){
+		if ($this->ot_exist($group,'grp')) {
+			$atmp=$this->ot_readif('users.json','grp/'.$group);
+			if ($this->ot_maxvalue($atmp[$this->id],3,"C0010M012")) {
+				$this->ot_changein($code,$value,'private.json','grp/'.$group);
+			}
+		}
+		$this->ot_log( __METHOD__ , __FUNCTION__ , func_get_args() , $this->retval );
+		return $this->retval;
+	}	
+	function GrpDltPrv($group, $code){
+		if ($this->ot_exist($group,'grp')) {
+			$atmp=$this->ot_readif('users.json','grp/'.$group);
+			if ($this->ot_maxvalue($atmp[$this->id],1,"C0010M012")) {
+				$this->ot_deletein($code,'private.json','grp/'.$group);
+			}
+		}
+		$this->ot_log( __METHOD__ , __FUNCTION__ , func_get_args() , $this->retval );
+		return $this->retval;
 	}
+
 }
 ?>

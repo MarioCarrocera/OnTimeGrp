@@ -22,7 +22,7 @@ function nf($file, $to)
 	}
 }
 
-$files= array('OnTime.php','OnTimetmp.php','OnTimeGrpsA.php','OnTimeGrpsB.php','OnTimeFunctions.php','OTigrp.php','OnTimeAllways.php');
+$files= array('OnTime.php','OnTimetmp.php','OnTimeGrpsA.php','OnTimeGrpsB.php','OTigrp.php','OnTimeAllways.php');
 echo 'Start '.'<br>';
 
 $base='ontime';

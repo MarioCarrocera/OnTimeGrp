@@ -4,188 +4,210 @@ ini_set('display_errors', true);
 error_reporting(E_ERROR | E_PARSE | E_NOTICE | E_WARNING);
 
 $base='ontime/';
+$AdminPassword='OT2021Free';
 include_once($base."OnTime.php");
 $demo=new OnTime();
 
-echo "********** <br> Main containe <br> ********** <br> <br>";
-echo "Try conect with correct info ->Connect('admin','OT2021Free'): ";$demo->Connect('admin','OT2021Free');
+echo "********** <br> Create Class  <br> ********** <br> <br>";
+$demo->ot_error('basic content exist').'<br>';
 
-$demo->UserAdd('Demo','12345','active','Demostration user ','Demito');
-$demo->UserAdd('Demo1','12345','active','Demostration 1 ','me');
-$demo->UserAdd('Demo2','12345','active','Demostration two ','you');
-$demo->UserAdd('Demo3','12345','active','Demostration 3 ','all');
-$demo->UserAdd('Demo4','12345','active','Demostration dour ','us are');
 
-echo "********** <br> Group Create <br> ********** <br> <br>";
+echo "**********+++++++++++ <br> Conecting like admin <br> **********+++++++++++ <br> <br>";
+echo "Connect('admin','OT2021Free') ";
+$demo->Connect('admin',$AdminPassword);
+echo  "<br>";$demo->ot_error("Connected!!!");echo "<br>";
 
-echo "CreateGroup('First Group','Group Name','group')";
-$demo->CreateGroup('First Group','Group Name','group');
-$demo->ot_error("Create!!!");
 
-echo "CreateGroup('Second','another group','i can say')";
-$demo->CreateGroup('Second','another group','i can say');
-$demo->ot_error("Create!!!");
 
-echo "CreateGroup('Mine','For u','red')";
-$demo->CreateGroup('Mine','For u','red');
-$demo->ot_error("Create!!!");
+echo "**********+++++++++++ <br> Create Demostrion user <br> **********+++++++++++ <br> <br>";
+$demo->CrtUsr('Demo','12345','active','Demostration user','Demo 1');
+echo  "<br>";$demo->ot_error("create!!!");echo "<br>";
+$demo->CrtUsr('DEMO','12345','active','Demostration user','Demo 2');
+echo  "<br>";$demo->ot_error("create!!!");echo "<br>";
+$demo->CrtUsr('demo','12345','active','Demostration user','Demo 3');
+echo  "<br>";$demo->ot_error("create!!!");echo "<br>";
 
-echo "********** <br> Group User <br> ********** <br> <br>";
-echo "GrpAddUsr('Mine','Demo',1)";
-$demo->GrpAddUsr('Mine','Demo',1);
-$demo->ot_error("Asigned!!!");
+echo "**********+++++++++++ <br> Group <br> **********+++++++++++ <br> <br>";
+echo "********** <br> Adding <br> **********+ <br> <br>";
+echo "CrtGrp('Administrators','Administrators for the main Feature','admins')";
+$demo->CrtGrp('Administrators','Administrators for the main Feature','admins');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "CrtGrp('Everyone','All users','EvrAll')";
+$demo->CrtGrp('Everyone','All users','EvrAll');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "CrtGrp('AdminUsers','Administrators on User Featrute','AUser')";
+$demo->CrtGrp('AdminUsers','Administrators on User Featrute','AUser');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "CrtGrp('AdminGroups','Administrators on Group Featrute','AGroup')";
+$demo->CrtGrp('AdminGroups','Administrators on User Featrute','AGroup');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
 
-echo "GrpAddUsr('Second','Demo',3)";
-$demo->GrpAddUsr('Second','Demo',3);
-$demo->ot_error("Asigned!!!");
-
-echo "GrpAddUsr('First Group','Demo',3)";
-$demo->GrpAddUsr('First Group','Demo',3);
-$demo->ot_error("Asigned!!!");
-
-echo "GrpShwUsr('First Group')"."<br>";
-$demo->ot_show($demo->GrpShwUsr('First Group'));
-
-echo "GrpChgUsr('First Group','Demo',2)"."<br>"."<br>";
-$demo->GrpChgUsr('First Group','Demo',2);
-$demo->ot_error("Changed!!!")."<br>";
-
-echo "GrpShwUsr('First Group')"."<br>";
-$demo->ot_show($demo->GrpShwUsr('First Group'));
-
-echo "GrpDltUsr('First Group','Demo')"."<br>"."<br>";
-$demo->GrpDltUsr('First Group','Demo');
-$demo->ot_error("Delete!!!")."<br>";
-
-echo "GrpShwUsr('First Group')"."<br>";
-$demo->ot_show($demo->GrpShwUsr('First Group'));
-
-echo "********** <br> Group Feature <br> ********** <br> <br>";
-echo "GrpAddFtr('Mine','grp',0)";
-$demo->GrpAddFtr('Mine','grp',0);
-$demo->ot_error("Asigned!!!");
-
-echo "GrpAddFtr('Mine','usr',3)";
-$demo->GrpAddFtr('Mine','usr',3);
-$demo->ot_error("Asigned!!!");
-
-echo "GrpAddFtr('Second','usr',2)";
-$demo->GrpAddFtr('Second','usr',2);
-$demo->ot_error("Asigned!!!");
-
-echo "GrpAddFtr('Second','grp',2)";
-$demo->GrpAddFtr('Second','grp',2);
-$demo->ot_error("Asigned!!!");
-
-echo "GrpShwFtr('Mine')"."<br>";
-$demo->ot_show($demo->GrpShwFtr('Mine'));
-
-echo "GrpChgFtr('Mine','usr',1)"."<br>"."<br>";
-$demo->GrpChgFtr('Mine','usr',1);
-$demo->ot_error("Changed!!!")."<br>";
-
-echo "GrpShwFtr('Mine')"."<br>";
-$demo->ot_show($demo->GrpShwFtr('Mine'));
-
-echo "GrpDltFtr('Mine','grp')"."<br>"."<br>";
-$demo->GrpDltFtr('Mine','grp');
-$demo->ot_error("Delete!!!")."<br>";
-
-echo "GrpShwFtr('Mine')"."<br>";
-$demo->ot_show($demo->GrpShwFtr('Mine'));
-
-echo "********** <br> Group Public Information <br> ********** <br> <br>";
-echo "GrpAddPbl('Mine',,'one record','the information i wana share')"."<br>";
-$demo->GrpAddPbl('Mine','one record','the information i wana share');
-$demo->ot_error("Asigned!!!")."<br>";
-
-echo "GrpAddPbl('Mine','who','askme to ad u')"."<br>";
-$demo->GrpAddPbl('Mine','who','askme to ad u');
-$demo->ot_error("Asigned!!!")."<br>";
-
-echo "GrpShwPbl('Mine')"."<br>";
-$demo->ot_show($demo->GrpShwPbl('Mine'));
-
-echo "GrpChgPbl('Mine','who','askme to add you')"."<br>"."<br>";
-$demo->GrpChgPbl('Mine','who','askme to add you');
-$demo->ot_error("Changed!!!")."<br>";
-
-echo "GrpShwPbl('Mine')"."<br>";
-$demo->ot_show($demo->GrpShwPbl('Mine'));
-
-echo "GrpDltPbl('Mine','one record')"."<br>"."<br>";
-$demo->GrpDltPbl('Mine','one record');
-$demo->ot_error("Delete!!!")."<br>";
-
-echo "GrpShwPbl('Mine')"."<br>";
-$demo->ot_show($demo->GrpShwPbl('Mine'));
-
-echo "********** <br> Group Private Information <br> ********** <br> <br>";
-echo "GrpAddPrv('Mine',,'alpha','is a secret')"."<br>";
-$demo->GrpAddPrv('Mine','alpha','is a secret');
-$demo->ot_error("Asigned!!!")."<br>";
-
-echo "GrpAddPrv('Mine','beta','askme to ad u')"."<br>";
-$demo->GrpAddPrv('Mine','beta','askme to ad u');
-$demo->ot_error("Asigned!!!")."<br>";
-
-echo "GrpShwPrv('Mine')"."<br>";
-$demo->ot_show($demo->GrpShwPrv('Mine'));
-
-echo "GrpChgPrv('Mine','beta','askme to add you')"."<br>"."<br>";
-$demo->GrpChgPrv('Mine','beta','askme to add you');
-$demo->ot_error("Changed!!!")."<br>";
-
-echo "GrpShwPrv('Mine')"."<br>";
-$demo->ot_show($demo->GrpShwPrv('Mine'));
-
-echo "GrpDltPrv('Mine','beta')"."<br>"."<br>";
-$demo->GrpDltPrv('Mine','beta');
-$demo->ot_error("Delete!!!")."<br>";
-
-echo "GrpShwPrv('Mine')"."<br>";
-$demo->ot_show($demo->GrpShwPrv('Mine'));
-
-$demo->DiscConnect();
-echo "Try conect with correct info ->Connect('demo','12345'): ";
-$demo->Connect('Demo','12345');
-echo "Conecion statust: ";
-if ($demo->conected) {
-	echo "True";} else {
-	echo "False";}; echo "<br>";
-	echo $demo->id; echo "<br>";
-
-echo "********** <br> My Groups <br> ********** <br>";
-$demo->ot_show($demo->MyGrps());
-
-echo "********** <br> Group list Options <br> ********** <br>";
-echo "All";
+echo "********** <br> Show All <br> **********+ <br> <br>";
+echo "GrpShwAll()";
 $demo->ot_show($demo->GrpShwAll());
 
-echo "Security"."<br>";
-$demo->ot_show($demo->MySafety());
-
-$demo->DiscConnect();
-echo "Try conect with correct info ->Connect('admin','OT2021Free'): ";
-$demo->Connect('admin','OT2021Free');
-
-echo "DeleteGroup('Mine')";
-$demo->DeleteGroup('Mine');
-$demo->ot_error("Create!!!");
-
-echo "DeleteGroup('First Group')";
-$demo->DeleteGroup('First Group');
-$demo->ot_error("Create!!!");
-echo "DeleteGroup('Second')";
-$demo->DeleteGroup('Second');
-$demo->ot_error("Create!!!");
+echo "********** <br> Show my groups <br> **********+ <br> <br>";
+echo "->groups";
+$demo->ot_show($demo->groups);
 
 
-$demo->UserDlt('Demo');
-$demo->UserDlt('Demo1');
-$demo->UserDlt('Demo2');
-$demo->UserDlt('Demo3');
-$demo->UserDlt('Demo4');
+echo "**********+++++++++++ <br> Group & User <br> **********+++++++++++ <br> <br>";
+echo "********** <br> Adding <br> **********+ <br> <br>";
+echo "GrpAddUsr('Everyone','DEMO','access')";
+$demo->GrpAddUsr('Everyone','DEMO','access');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "GrpAddUsr('AdminGroups','DEMO','owner')";
+$demo->GrpAddUsr('AdminGroups','DEMO','owner');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "GrpAddUsr('AdminGroups','Demo','create')";
+$demo->GrpAddUsr('AdminGroups','Demo','create');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "GrpAddUsr('AdminGroups','demo','access')";
+$demo->GrpAddUsr('AdminGroups','demo','access');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "********** <br> Show Users in AdminGroups <br> **********+ <br> <br>";
+echo "GrpShwUsr('AdminGroups')";
+$demo->ot_show($demo->GrpShwUsr('AdminGroups'));
+echo "GrpChgUsr('Everyone','demo','access')";
+$demo->GrpChgUsr('Everyone','demo','access');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "GrpChgUsr('AdminGroups','demo','change')";
+$demo->GrpChgUsr('AdminGroups','demo','change');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "********** <br> Show Users in AdminGroups <br> **********+ <br> <br>";
+echo "GrpShwUsr('AdminGroups')";
+$demo->ot_show($demo->GrpShwUsr('AdminGroups'));
+echo "GrpDltUsr('Everyone','demo')";
+$demo->GrpDltUsr('Everyone','demo');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "GrpDltUsr('AdminGroups','demo')";
+$demo->GrpDltUsr('AdminGroups','demo');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "********** <br> Show Users in AdminGroups <br> **********+ <br> <br>";
+echo "GrpShwUsr('AdminGroups')";
+$demo->ot_show($demo->GrpShwUsr('AdminGroups'));
 
-echo 'Demo Finish';
+echo "**********+++++++++++ <br> Group & Features <br> **********+++++++++++ <br> <br>";
+echo "********** <br> Adding <br> **********+ <br> <br>";
+echo "GrpAddFtr('Everyone','DEMO','access')";
+$demo->GrpAddFtr('Everyone','DEMO','access');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "GrpAddFtr('Everyone','usr','access')";
+$demo->GrpAddFtr('Everyone','usr','access');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "GrpAddFtr('Everyone','grp','access')";
+$demo->GrpAddFtr('Everyone','grp','access');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "GrpAddFtr('AdminGroups','grp','owner')";
+$demo->GrpAddFtr('AdminGroups','grp','owner');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "********** <br> Show Features in AdminGroups <br> **********+ <br> <br>";
+echo "GrpShwFtr('AdminGroups')";
+$demo->ot_show($demo->GrpShwFtr('AdminGroups'));
+echo "********** <br> Show Features in Everyone <br> **********+ <br> <br>";
+echo "GrpShwFtr('Everyone')";
+$demo->ot_show($demo->GrpShwFtr('Everyone'));
+echo "********** <br> Show group for feture grp <br> **********+ <br> <br>";
+echo "FtrShwGrp('grp')";
+$demo->ot_show($demo->FtrShwGrp('grp'));
+echo "********** <br> Show User Safety <br> **********+ <br> <br>";
+echo "FtrShwGrp('DEMO')";
+$demo->ot_show($demo->Safety('DEMO'));
+echo "********** <br> Add User Demo to Feature grp <br> **********+ <br> <br>";
+echo "UsrAddFtr('grp','DEMO','change')";
+$demo->UsrAddFtr('grp','DEMO','change');
+echo  "<br>";$demo->ot_error("Added!!!");echo "<br>";
+echo "********** <br> Show User Safety <br> **********+ <br> <br>";
+echo "FtrShwGrp('DEMO')";
+$demo->ot_show($demo->Safety('DEMO'));
+echo "********** <br> Adding <br> **********+ <br> <br>";
+echo "GrpAddFtr('Everyone','user','change')";
+$demo->GrpAddFtr('Everyone','user','change');
+echo  "<br>";$demo->ot_error("Changed!!!");echo "<br>";
+echo "GrpAddFtr('Everyne','usr','change')";
+$demo->GrpAddFtr('Everyne','usr','change');
+echo  "<br>";$demo->ot_error("Changed!!!");echo "<br>";
+echo "GrpAddFtr('Everyone','usr','change')";
+$demo->GrpAddFtr('Everyone','usr','change');
+echo  "<br>";$demo->ot_error("Changed!!!");echo "<br>";
+echo "********** <br> Show group for feture grp <br> **********+ <br> <br>";
+echo "FtrShwGrp('grp')";
+$demo->ot_show($demo->FtrShwGrp('grp'));
+echo "********** <br> deleting <br> **********+ <br> <br>";
+echo "GrpDltFtr('Everyone','user','change')";
+$demo->GrpDltFtr('Everyone','user','change');
+echo  "<br>";$demo->ot_error("Deleted!!!");echo "<br>";
+echo "GrpDltFtr('Everyne','usr','change')";
+$demo->GrpDltFtr('Everyne','usr','change');
+echo  "<br>";$demo->ot_error("Deleted!!!");echo "<br>";
+echo "GrpDltFtr('Everyone','usr','change')";
+$demo->GrpDltFtr('Everyone','usr','change');
+echo  "<br>";$demo->ot_error("Deleted!!!");echo "<br>";
+echo "********** <br> Show group for feture grp <br> **********+ <br> <br>";
+echo "FtrShwGrp('grp')";
+$demo->ot_show($demo->FtrShwGrp('grp'));
+
+echo "**********+++++++++++ <br> Group & Info <br> **********+++++++++++ <br> <br>";
+echo "********** <br> Group Public Information <br> ********** <br> <br>";
+echo "GrpAddPbl('Everyone',,'one record','the information i wana share')"."<br>";
+$demo->GrpAddPbl('Everyone','one record','the information i wana share');
+$demo->ot_error("Asigned!!!")."<br>";
+
+echo "GrpAddPbl('Everyone','who','askme to ad u')"."<br>";
+$demo->GrpAddPbl('Everyone','who','askme to ad u');
+$demo->ot_error("Asigned!!!")."<br>";
+
+echo "GrpShwPbl('Everyone')"."<br>";
+$demo->ot_show($demo->GrpShwPbl('Everyone'));
+
+echo "GrpChgPbl('Everyone','who','askme to add you')"."<br>"."<br>";
+$demo->GrpChgPbl('Everyone','who','askme to add you');
+$demo->ot_error("Changed!!!")."<br>";
+
+echo "GrpShwPbl('Everyone')"."<br>";
+$demo->ot_show($demo->GrpShwPbl('Everyone'));
+
+echo "GrpDltPbl('Everyone','one record')"."<br>"."<br>";
+$demo->GrpDltPbl('Everyone','one record');
+$demo->ot_error("Delete!!!")."<br>";
+
+echo "GrpShwPbl('Everyone')"."<br>";
+$demo->ot_show($demo->GrpShwPbl('Everyone'));
+
+echo "********** <br> Group Private Information <br> ********** <br> <br>";
+echo "GrpAddPrv('Everyone',,'alpha','is a secret')"."<br>";
+$demo->GrpAddPrv('Everyone','alpha','is a secret');
+$demo->ot_error("Asigned!!!")."<br>";
+
+echo "GrpAddPrv('Everyone','beta','askme to ad u')"."<br>";
+$demo->GrpAddPrv('Everyone','beta','askme to ad u');
+$demo->ot_error("Asigned!!!")."<br>";
+
+echo "GrpShwPrv('Everyone')"."<br>";
+$demo->ot_show($demo->GrpShwPrv('Everyone'));
+
+echo "GrpChgPrv('Everyone','beta','askme to add you')"."<br>"."<br>";
+$demo->GrpChgPrv('Everyone','beta','askme to add you');
+$demo->ot_error("Changed!!!")."<br>";
+
+echo "GrpShwPrv('Everyone')"."<br>";
+$demo->ot_show($demo->GrpShwPrv('Everyone'));
+
+echo "GrpDltPrv('Everyone','beta')"."<br>"."<br>";
+$demo->GrpDltPrv('Everyone','beta');
+$demo->ot_error("Delete!!!")."<br>";
+
+echo "GrpShwPrv('Everyone')"."<br>";
+$demo->ot_show($demo->GrpShwPrv('Everyone'));
+
+echo "DltGrp('Mine')";
+$demo->DltGrp('Mine');
+$demo->ot_error("Delete!!!");
+
+echo "DltGrp('Everyone')";
+$demo->DltGrp('Everyone');
+$demo->ot_error("Delete!!!");
+
+
+echo "**********+++++++++++ <br> Demo Finish<br> **********+++++++++++ <br> <br>";
 ?>
