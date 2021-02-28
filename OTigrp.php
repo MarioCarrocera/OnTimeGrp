@@ -13,7 +13,7 @@ trait OTgrp{
 			$tmp['limit']=1;
 			$tmp['OnUse']=1;
 			$temp=$this->ot_add('grp',$tmp,$temp,'container.json');
-			$this->ot_addin('grp',0,"usr/".$this->id.'/features.json');
+			$this->ot_addin('grp','owner',"usr/".$this->id.'/features.json');
 			$tmp=[];
 			$tmp['nick']='Groups';
 			$tmp['name']='Groups Feature';
